@@ -37,16 +37,19 @@ class HighlightProImpl : HighlightViewInteractiveAction {
     private var showCallback: ((index: Int) -> Unit)? = null
     private var dismissCallback: (() -> Unit)? = null
     private var clickCallback: ((View) -> Unit)? = null
-    private var autoNext = true
+    private var autoNext =  false
     private var needAnchorTipView = false
 
     //    private var
     private val onClickListener = View.OnClickListener {
-        clickCallback?.invoke(it)
-        needAnchorTipView=highlightParameters.size>1
-        if (autoNext) {
-            showNextHighLightView()
+        if (clickCallback!=null ){
+            clickCallback?.invoke(it)
+            if (autoNext)   showNextHighLightView()
         }
+        else {
+            if (autoNext)   showNextHighLightView() else dismiss()
+        }
+
     }
 
     internal constructor(activity: Activity) {
@@ -73,8 +76,6 @@ class HighlightProImpl : HighlightViewInteractiveAction {
 
     override fun show(): HighlightProImpl {
         if (released) return this
-        println("$TAG show")
-        //todo give user access to intercept click event
 //        if (!intercept) {
         maskContainer.setOnClickListener(onClickListener)
 //        }
@@ -198,11 +199,13 @@ class HighlightProImpl : HighlightViewInteractiveAction {
     fun setGuideViewParameters(highlightParameters: List<HighlightParameter>) {
         if (released) return
         this.highlightParameters.add(highlightParameters)
+       autoNext= highlightParameters.size>1
     }
 
     fun setGuideViewParameter(block: () -> HighlightParameter) {
         if (released) return
         highlightParameters.add(listOf(block.invoke()))
+        autoNext= highlightParameters.size>1
     }
 
     fun setOnShowCallback(showCallback: (Int) -> Unit) {
