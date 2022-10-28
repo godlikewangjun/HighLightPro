@@ -1,6 +1,7 @@
 package com.hyy.highlightpro
 
 import android.app.Activity
+import android.text.AutoText
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,7 @@ import com.hyy.highlightpro.view.MaskContainer
  * All [HighlightPro]'s method implementation show in this class
  * and [HighlightProImpl] is the core class in this library
  */
-internal class HighlightProImpl : HighlightViewInteractiveAction {
+class HighlightProImpl : HighlightViewInteractiveAction {
 
     companion object {
         const val TAG = "HYY-GuideProImpl"
@@ -37,11 +38,12 @@ internal class HighlightProImpl : HighlightViewInteractiveAction {
     private var dismissCallback: (() -> Unit)? = null
     private var clickCallback: ((View) -> Unit)? = null
     private var autoNext = true
-    private var needAnchorTipView = true
+    private var needAnchorTipView = false
 
     //    private var
     private val onClickListener = View.OnClickListener {
         clickCallback?.invoke(it)
+        needAnchorTipView=highlightParameters.size>1
         if (autoNext) {
             showNextHighLightView()
         }
@@ -69,8 +71,8 @@ internal class HighlightProImpl : HighlightViewInteractiveAction {
 
     }
 
-    override fun show() {
-        if (released) return
+    override fun show(): HighlightProImpl {
+        if (released) return this
         println("$TAG show")
         //todo give user access to intercept click event
 //        if (!intercept) {
@@ -124,7 +126,7 @@ internal class HighlightProImpl : HighlightViewInteractiveAction {
             }
 
         }
-
+        return this
     }
 
     /**
@@ -206,6 +208,10 @@ internal class HighlightProImpl : HighlightViewInteractiveAction {
     fun setOnShowCallback(showCallback: (Int) -> Unit) {
         this.showCallback = showCallback
     }
+    fun setAutoNext(autoNext:Boolean) {
+        this.autoNext = autoNext
+    }
+
 
     fun setOnDismissCallback(dismissCallback: () -> Unit) {
         this.dismissCallback = dismissCallback

@@ -34,8 +34,9 @@ class HighlightPro : HighlightViewInteractiveAction {
     /**
      * [show] is a final method to call then show a guide or a popup window
      */
-    override fun show() {
+    override fun show():HighlightProImpl {
         highlightProImpl.show()
+        return highlightProImpl
     }
 
     /**
@@ -93,6 +94,14 @@ class HighlightPro : HighlightViewInteractiveAction {
      */
     fun setOnMaskViewClickCallback(clickCallback: (View) -> Unit): HighlightPro {
         highlightProImpl.setOnGuideViewClickCallback(clickCallback)
+        return this
+    }
+
+    /**
+     * [autoNext] set autoNext
+     */
+    fun setAutoNext(autoNext: Boolean): HighlightPro {
+        highlightProImpl.setAutoNext(autoNext)
         return this
     }
 

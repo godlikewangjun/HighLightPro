@@ -9,7 +9,7 @@ interface HighlightViewInteractiveAction {
     /**
      *  show [HighlightPro]
      */
-    fun show()
+    fun show():HighlightProImpl
 
     /**
      *  dismiss [HighlightPro]
