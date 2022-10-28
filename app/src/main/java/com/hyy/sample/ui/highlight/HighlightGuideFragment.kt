@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.BounceInterpolator
 import android.view.animation.TranslateAnimation
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.hyy.highlightpro.HighlightPro
@@ -72,6 +73,9 @@ class HighlightGuideFragment : Fragment() {
                     .setMarginOffset(MarginOffset(4.dp, 4.dp, 4.dp, 4.dp))
                     .setTipViewDisplayAnimation(translateAnimation)
                     .build()
+            }
+            .setLightCallback {
+                Toast.makeText(activity, "light click", Toast.LENGTH_SHORT).show()
             }
             .interceptBackPressed(true)
             .show()

@@ -214,6 +214,9 @@ class HighlightProImpl : HighlightViewInteractiveAction {
     fun setAutoNext(autoNext:Boolean) {
         this.autoNext = autoNext
     }
+    fun setLightCallback(block: () -> Unit) {
+        this.maskContainer.setLightCallback(block)
+    }
 
 
     fun setOnDismissCallback(dismissCallback: () -> Unit) {

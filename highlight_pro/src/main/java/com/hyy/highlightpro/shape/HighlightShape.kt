@@ -26,7 +26,7 @@ open class HighlightShape(val blurRadius: Float = 0.0f) {
         }
     }
 
-    protected var rect: RectF? = null
+    var rect: RectF? = null
 
     /**
     *  init rect  child should override initRect and init path

@@ -4,15 +4,17 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Region
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Gravity
 import android.view.KeyEvent
+import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 import androidx.core.graphics.toColorInt
 import androidx.core.view.children
+import com.hyy.highlightpro.HighlightProImpl
 import com.hyy.highlightpro.parameter.Constraints
 import com.hyy.highlightpro.parameter.HighlightParameter
-import com.hyy.highlightpro.HighlightProImpl
 
 /**
  *Create by hyy on 2021/2/6
@@ -33,6 +35,7 @@ internal class MaskContainer constructor(context: Context, attributeSet: Attribu
         get() = "#00000000".toColorInt()
 
     private var backPressedCallback: (() -> Unit)? = null
+    private var lightCallback: (() -> Unit)? = null
     internal var enableHighlight = true
     internal var interceptBackPressed = false
     internal var needAnchorTipView = true
@@ -76,6 +79,20 @@ internal class MaskContainer constructor(context: Context, attributeSet: Attribu
         }
     }
 
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        when (event!!.action) {
+            MotionEvent.ACTION_DOWN -> {
+                highLightViewParameters[0].highlightShape?.run {
+                   return  if (event.x>this.rect!!.left && event.x<this.rect!!.right && event.y>this.rect!!.top && event.y<this.rect!!.bottom) {
+                       lightCallback?.invoke()
+                       true
+                   } else super.onTouchEvent(event)
+                }
+            }
+        }
+        return super.onTouchEvent(event)
+    }
+
     override fun setBackgroundColor(color: Int) {
 //        super.setBackgroundColor(color)
         bgColor = color
@@ -84,6 +101,12 @@ internal class MaskContainer constructor(context: Context, attributeSet: Attribu
     fun setOnBackPressedCallback(block: () -> Unit) {
         backPressedCallback = block
     }
+
+    fun setLightCallback(block: () -> Unit) {
+        lightCallback = block
+    }
+
+
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

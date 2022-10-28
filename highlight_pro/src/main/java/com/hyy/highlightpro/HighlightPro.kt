@@ -114,6 +114,16 @@ class HighlightPro : HighlightViewInteractiveAction {
     }
 
     /**
+     * [setLightCallback] light click
+     */
+    fun setLightCallback(block: () -> Unit): HighlightPro {
+        highlightProImpl.setLightCallback(block)
+        return this
+    }
+
+
+
+    /**
      * [interceptBackPressed] is [true] will intercept activity onBackPressed and [HighlightPro] will dismiss
      */
     fun interceptBackPressed(interceptBackPressed: Boolean): HighlightPro {
