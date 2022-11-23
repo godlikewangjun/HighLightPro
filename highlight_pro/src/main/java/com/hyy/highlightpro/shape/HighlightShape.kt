@@ -11,7 +11,7 @@ open class HighlightShape(val blurRadius: Float = 0.0f) {
     private lateinit var paint: Paint
 
     //clip path
-    internal val path by lazy {
+    val path by lazy {
         Path()
     }
 

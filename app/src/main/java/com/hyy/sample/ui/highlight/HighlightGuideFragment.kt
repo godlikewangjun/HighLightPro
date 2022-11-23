@@ -62,10 +62,11 @@ class HighlightGuideFragment : Fragment() {
         translateAnimation.duration = 500
         translateAnimation.interpolator = BounceInterpolator()
 
+        val showView=(childFragmentManager.findFragmentByTag("test") as TestFragment).requireView().findViewById<View>(R.id.btn_hello_world)
         HighlightPro.with(this)
             .setHighlightParameter {
                 HighlightParameter.Builder()
-                    .setHighlightViewId(R.id.btn_hello_world)
+                    .setHighlightView(showView)
                     .setTipsViewId(R.layout.guide_tips_layout)
                     .setHighlightShape(RectShape(4f.dp, 4f.dp, 6f))
                     .setHighlightHorizontalPadding(8f.dp)
