@@ -38,7 +38,7 @@ open class HighlightShape(val blurRadius: Float = 0.0f) {
     /**
      *  draw our path
      */
-    fun drawPath(canvas: Canvas) {
+    open fun drawPath(canvas: Canvas) {
         rect?.run {
             if (isEmpty.not()) {
                 canvas.drawPath(path, paint)
