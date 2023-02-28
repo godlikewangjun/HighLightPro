@@ -14,6 +14,10 @@ sealed class Constraints {
     object StartToEndOfHighlight : Constraints()
     object EndToEndOfHighlight : Constraints()
     object EndToStartOfHighlight : Constraints()
+    object BottomOfHighlight : Constraints()
+    object TopOfHighlight : Constraints()
+    object LeftOfHighlight : Constraints()
+    object RightOfHighlight : Constraints()
 
     operator fun plus(locationGravity: Constraints): List<Constraints> {
         return listOf(this, locationGravity)

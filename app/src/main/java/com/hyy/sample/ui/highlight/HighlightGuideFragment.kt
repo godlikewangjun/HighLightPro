@@ -9,6 +9,7 @@ import android.view.animation.TranslateAnimation
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import com.followerlikereport.task.views.weight.AnalysisRectShape
 import com.hyy.highlightpro.HighlightPro
 import com.hyy.highlightpro.parameter.Constraints
 import com.hyy.highlightpro.parameter.HighlightParameter
@@ -68,7 +69,7 @@ class HighlightGuideFragment : Fragment() {
                 HighlightParameter.Builder()
                     .setHighlightView(showView)
                     .setTipsViewId(R.layout.guide_tips_layout)
-                    .setHighlightShape(RectShape(4f.dp, 4f.dp, 6f))
+                    .setHighlightShape(AnalysisRectShape(14f.dp))
                     .setHighlightHorizontalPadding(8f.dp)
                     .setConstraints(getConstraints())
                     .setMarginOffset(MarginOffset(4.dp, 4.dp, 4.dp, 4.dp))

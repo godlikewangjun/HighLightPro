@@ -220,6 +220,18 @@ internal class MaskContainer constructor(context: Context, attributeSet: Attribu
                     layoutParams.topMargin = (highLightRect.bottom + margin.top).toInt()
                     gravities.add(Gravity.TOP)
                 }
+                Constraints.TopOfHighlight -> {
+                    gravities.add(Gravity.TOP)
+                }
+                Constraints.BottomOfHighlight -> {
+                    gravities.add(Gravity.BOTTOM)
+                }
+                Constraints.LeftOfHighlight -> {
+                    gravities.add(Gravity.LEFT)
+                }
+                Constraints.RightOfHighlight -> {
+                    gravities.add(Gravity.RIGHT)
+                }
             }
         }
         gravities.forEachIndexed { index, gravity ->
